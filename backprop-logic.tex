@@ -1,0 +1,60 @@
+\documentclass{article}
+
+\usepackage[round]{natbib}
+
+\newcommand{\interp}[1]{[\![ #1 ]\!]}
+
+\title{Towards Confluence: Model Building for First Order Abelian
+  Logic using Backpropagation and Stochastic Gradient Descent}
+
+\author{Daoud Clarke and Bill Keller}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+In this paper we apply techniques used for learning neural networks to
+build logical models. Specifically, we use backpropagation and
+stochastic gradient descent to learn models for a new logic, first
+order Abelian logic, which we also describe. The motivation for this
+work is natural language semantics in which words are often
+represented as vectors. The models we learn represent predicates as
+vectors, or more generally, tensors.
+
+\section{First order Abelian logic}
+
+First order Abelian logic is intended to extend the predicate logic of
+\cite{Meyer:89} with first order quantifiers, however we leave the
+proof of a formal relationship between their logic and ours to further
+work. Moreover, we use vector spaces for models instead of the more
+general Abelian groups they use, since the continuity properties are
+more suited to the techniques we wish to apply.
+
+The language of first order Abelian logic is that of standard first
+order logic; for simplicity we exclude equality, functions and free
+variables. Its semantics are as follows:
+\begin{itemize}
+\item The interpretation of an $n$ place predicate is a tensor of
+  order $n$; zero-place predicates (constants) are zero order tensors
+  (scalars).
+\item $\interp{\alpha \land \beta} = \interp{\alpha} \land
+  \interp{\beta}$ where $\land$ on the right hand side denotes
+  the tensor component-wise minimum.
+\item $\interp{\alpha \lor \beta} = \interp{\alpha} \lor
+  \interp{\beta}$ where $\lor$ on the right hand side denotes
+  the tensor component-wise maximum.
+\item $\interp{\forall x\alpha(x)} = $
+\end{itemize}
+where, for $T$ a tensor of order $n$, $\bigvee_i T$ denotes the tensor
+of order $n-1$ formed by taking the component-wise maximum over all
+order $n-1$ sub-tensors in the $i$th dimension. Similarly,
+$\bigwedge_i$ T denotes the tensor formed by taking component-wise
+minimums over all sub-tensors in the $i$th dimension.
+
+\bibliographystyle{plainnat}
+\bibliography{JW2012}
+
+
+\end{document}
