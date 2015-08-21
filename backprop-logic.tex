@@ -34,24 +34,83 @@ more suited to the techniques we wish to apply.
 
 The language of first order Abelian logic is that of standard first
 order logic; for simplicity we exclude equality, functions and free
-variables. Its semantics are as follows:
+variables. We denote variables $x_1, x_2, \ldots$. Its
+semantics are as follows:
 \begin{itemize}
-\item The interpretation of an $n$ place predicate is a tensor of
-  order $n$; zero-place predicates (constants) are zero order tensors
-  (scalars).
-\item $\interp{\alpha \land \beta} = \interp{\alpha} \land
-  \interp{\beta}$ where $\land$ on the right hand side denotes
-  the tensor component-wise minimum.
-\item $\interp{\alpha \lor \beta} = \interp{\alpha} \lor
-  \interp{\beta}$ where $\lor$ on the right hand side denotes
-  the tensor component-wise maximum.
-\item $\interp{\forall x\alpha(x)} = $
+\item The interpretation of an $n$ place predicate symbol $P$ is a
+  tensor $T_P$ of order $n$; zero-place predicates (constants) are
+  zero order tensors (scalars).
+\item The interpretation of a formula is an \emph{assigned tensor},
+  i.e.~a pair $\langle T, A\rangle$, where $T$ is a tensor of order
+  $n$ and $A$ is an $n$-tuple of integers describing variable
+  assignment.
+\item The interpretation of a formula $P(x_{i_1}, x_{i_2},\ldots
+  x_{i_n})$ where $P$ is an $n$-place predicate symbol is the assigned
+  tensor $\langle T_P, \langle i_1, i_2, \ldots i_n\rangle\rangle$. For
+  example the formula $\mathit{loves}(x_2, x_3)$ would have the
+  assigned tensor $\langle T_{\mathit{loves}}, \langle 2, 3
+  \rangle\rangle$.
+\item The interpretation of $\alpha \circ \beta$, where $\circ$ is
+  either $\land$, $\lor$ or $\rightarrow$ is
+  $\interp{\alpha}\bullet\interp{\beta}$, where $\bullet$ is the
+  \emph{assigned tensor unification} operation corresponding to
+  $\circ$, described below, and $\interp{\alpha}$ denotes the
+  interpretation of the formula $\alpha$.
+\item The interpretation of $\forall x_i\ \alpha$ (or $\exists
+  x_i\ \alpha$) where $\interp{\alpha} = \langle T, A\rangle$ and $T$
+  is of order $n$ is an assigned tensor $\langle T', A'\rangle$ where
+  $T'$ is of order $n-1$ and consists of the component-wise minimum
+  (component-wise maximum) of all slices of the tensor in dimension
+  $j$, where $j$ is the index of $A$ in which $i$ occurs and $A'$ is
+  $A$ with $i$ removed. For example, suppose the predicate
+  $\mathit{loves}$ is described by the order 2 tensor
+$$T_{\mathit{loves}} = \left( \begin{array}{rrr}
+0.1 & 0 & -0.2 \\
+0.2 & 0.5 & 0 \\
+-0.3 & 0.1 & 0 \end{array} \right)$$
+Then $\interp{\mathit{loves}(x_3, x_2)} = \langle{T_{\mathit{loves}},
+  \langle 3,2\rangle\rangle}$ and $\interp{\exists
+  x_2\ \mathit{loves}(x_3, x_2)}$ is $\langle T_{\mathit{loves}}',
+\langle 3\rangle\rangle$, where
+$$T_{\mathit{loves}}' = \left( \begin{array}{r}
+0.1 \\
+0.2 \\
+-0.3
+\end{array}\right) \sqcup \left( \begin{array}{r}
+0 \\
+0.5 \\
+0.1 
+\end{array}\right) \sqcup \left( \begin{array}{r}
+-0.2 \\
+0 \\
+0 \end{array} \right) = \left( \begin{array}{r}
+0.1 \\
+0.5 \\
+0.1 \end{array} \right)$$
+and $\sqcup$ denotes the component-wise maximum. Note that we perform
+the operation over the \emph{columns} of the tensor since the
+quantification is over $x_2$ and 2 occurs in the second position of
+$A$; if the quantification had been over $x_3$ we would have used the
+rows.
+
 \end{itemize}
-where, for $T$ a tensor of order $n$, $\bigvee_i T$ denotes the tensor
-of order $n-1$ formed by taking the component-wise maximum over all
-order $n-1$ sub-tensors in the $i$th dimension. Similarly,
-$\bigwedge_i$ T denotes the tensor formed by taking component-wise
-minimums over all sub-tensors in the $i$th dimension.
+
+%% \item The interpretation of an $n$ place predicate applied to
+%%   variables $x_{i_1}, x_{i_2}, \ldots x_{i_n}$ is a transposition of the
+%%   tensor such that transposing the corresponding variables results in
+%%   the variables being ordered from least to greatest.
+%% \item $\interp{\alpha \land \beta} = \interp{\alpha} \land
+%%   \interp{\beta}$ where $\land$ on the right hand side denotes
+%%   the tensor component-wise minimum.
+%% \item $\interp{\alpha \lor \beta} = \interp{\alpha} \lor
+%%   \interp{\beta}$ where $\lor$ on the right hand side denotes
+%%   the tensor component-wise maximum.
+
+%% where, for $T$ a tensor of order $n$, $\bigvee_i T$ denotes the tensor
+%% of order $n-1$ formed by taking the component-wise maximum over all
+%% order $n-1$ sub-tensors in the $i$th dimension. Similarly,
+%% $\bigwedge_i$ T denotes the tensor formed by taking component-wise
+%% minimums over all sub-tensors in the $i$th dimension.
 
 \bibliographystyle{plainnat}
 \bibliography{JW2012}
