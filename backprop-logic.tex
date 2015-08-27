@@ -112,6 +112,25 @@ rows.
 %% $\bigwedge_i$ T denotes the tensor formed by taking component-wise
 %% minimums over all sub-tensors in the $i$th dimension.
 
+
+\subsection{Assigned tensor unification}
+
+We define the operations $\sqcup$, $\sqcap$ and $-$ between assigned
+tensors, these are used in interpretations in place of the logical
+symbols $\lor$, $\land$ and $\leftarrow$ respectively. Let $\langle
+T, A\rangle$ and $\langle S, B\rangle$ be two assigned tensors. We
+define $\langle U, C\rangle = \langle T, A\rangle \bullet \langle S,
+B\rangle$ where $\bullet$ is one of $\sqcup$, $\sqcap$ and $-$. $C$ is
+the sorted union of $A$ and $B$ in ascending order. Let $I = \langle
+i_1, i_2 \ldots i_m\rangle$ be an indexing of $U$. The components
+ of $U$ are
+$$ U_I = T_J \bullet S_K$$
+where $J$ and $K$ are indexes defined such that $j_a = i_c$ and $k_b =
+i_c$ where $c$ is the index in $C$ of the $a$th element of $A$ and $b$
+is its index in $B$.
+
+
+
 \bibliographystyle{plainnat}
 \bibliography{JW2012}
 
