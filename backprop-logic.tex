@@ -117,18 +117,53 @@ rows.
 
 We define the operations $\sqcup$, $\sqcap$ and $-$ between assigned
 tensors, these are used in interpretations in place of the logical
-symbols $\lor$, $\land$ and $\leftarrow$ respectively. Let $\langle
-T, A\rangle$ and $\langle S, B\rangle$ be two assigned tensors. We
-define $\langle U, C\rangle = \langle T, A\rangle \bullet \langle S,
-B\rangle$ where $\bullet$ is one of $\sqcup$, $\sqcap$ and $-$. $C$ is
-the sorted union of $A$ and $B$ in ascending order. Let $I = \langle
-i_1, i_2 \ldots i_m\rangle$ be an indexing of $U$. The components
- of $U$ are
+symbols $\lor$, $\land$ and $\leftarrow$ respectively. Let $\langle T,
+A\rangle$ and $\langle S, B\rangle$ be two assigned tensors. We define
+$\langle U, C\rangle = \langle T, A\rangle \bullet \langle S,
+B\rangle$ where $\bullet$ is one of $\sqcup$, $\sqcap$ and $-$. Then
+$C$ is the sorted union of $A$ and $B$ in ascending order, and $U$ is
+a tensor of order $|C|$. Let $I = \langle i_1, i_2 \ldots i_m\rangle$
+be an indexing of $U$. The components of $U$ are
 $$ U_I = T_J \bullet S_K$$
 where $J$ and $K$ are indexes defined such that $j_a = i_c$ and $k_b =
 i_c$ where $c$ is the index in $C$ of the $a$th element of $A$ and $b$
 is its index in $B$.
 
+For example, assume $\mathit{bill}$ and $\mathit{run}$ have
+interpretations
+$$T_{\mathit{bill}} = \left( \begin{array}{r}
+0.3 \\
+-0.2 \\
+-0.1
+\end{array}\right) \quad T_{\mathit{run}} = \left( \begin{array}{r}
+0.1 \\
+0.1 \\
+-0.2
+\end{array}\right)$$
+Then $\mathit{bill}(x_1)\land\mathit{run}(x_2)$ has
+the interpretation
+$$\langle T_{\mathit{bill}}, \langle 1\rangle\rangle \sqcap \langle
+  T_{\mathit{run}} \langle 2\rangle\rangle = \langle U, \langle 1, 2\rangle\rangle$$
+where
+$$U = \left( \begin{array}{rrr}
+0.3\land 0.1 & -0.2\land 0.1 & -0.1\land 0.1 \\
+0.3\land 0.1 & -0.2\land 0.1 & -0.1\land 0.1 \\
+0.3\land -0.2 & -0.2\land -0.2 & -0.1\land -0.2 \\
+\end{array} \right) = \left( \begin{array}{rrr}
+0.1 & -0.2 & -0.1 \\
+0.1 & -0.2 & -0.1 \\
+-0.2 & -0.2 & -0.2 \end{array} \right)$$
+However $\mathit{bill}(x_1)\land\mathit{run}(x_1)$ has
+the interpretation $\langle U',\langle 1\rangle\rangle$ where
+$$U' =  \left( \begin{array}{r}
+0.3 \land 0.1\\
+-0.2 \land 0.1 \\
+-0.1 \land -0.2
+\end{array}\right) =  \left( \begin{array}{r}
+0.1 \\
+-0.2 \\
+-0.2
+\end{array}\right) $$
 
 
 \bibliographystyle{plainnat}
